@@ -1,2 +1,19 @@
-# netscope-network-observability
-Personal network black box for investigating intermittent connectivity and latency.
+# NetScope
+
+타르코프에서 한 판 하려고 준비를 마쳤는데 레이드에 들어가기도 전에 한참을 기다릴 때가 있다. 오늘 유독 오래 걸린 건지, 매칭 화면에서 기다렸는지, 다른 플레이어를 기다리는 화면이 길었는지 다음 판이 되면 기억이 흐려진다. NetScope는 그 기다림을 내 PC에서 기록하는 개인용 네트워크 진단 프로젝트다.
+
+## 레이드 한 판 기록하기
+
+Python 3에서 저장소 루트를 열고 플레이할 맵 이름을 입력한다.
+
+```sh
+python tools/raid_timer.py Customs
+```
+
+1. 게임에서 Ready를 누를 때 터미널에서도 Enter를 누른다.
+2. 구간을 남기고 싶으면 화면이 바뀔 때 `Matching`처럼 화면에 보이는 문구를 입력하고 Enter를 누른다. 전체 시간만 궁금하면 이 단계는 건너뛴다.
+3. 실제 레이드에 들어가면 빈 줄에서 Enter를 누른다. 이번 대기 시간과 이전에 같은 맵에서 기록한 중앙값의 차이가 초 단위로 표시된다.
+
+첫 판은 기준 기록이 된다. 중간에 취소한 판은 Ctrl+C로 버릴 수 있다. 완료 기록과 화면 전환 시점은 로컬 `netscope.sqlite3`에 저장된다. 직접 키를 누른 시각을 재므로 결과에는 입력 지연도 포함된다. 게임 서버 내부에서 각 요청을 처리한 시간은 이 기록만으로 알 수 없다.
+
+별도 서비스의 TCP 연결을 측정하는 방법은 [TCP 연결 기록](docs/tcp-probe.md)에 정리했다.
